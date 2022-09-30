@@ -20,7 +20,7 @@ export const Options = (props: {
 
   return (
     <div class="mx-4 lg:mx-0">
-      <div class="flex justify-center lg:justify-start">
+      <div class="flex justify-center items-center lg:justify-start">
         {!options.data.length && (
           <p class="italic opacity-40 text-lg lg:text-xl">
             No options are added, yet.
@@ -29,7 +29,7 @@ export const Options = (props: {
         <ul class="list-inside ml-2 space-y-4">
           {options.data.map((o) => {
             return (
-              <li class="text-lg flex space-x-2 items-center">
+              <li class="text-lg flex space-x-2 justify-center lg:justify-start items-center">
                 <div class="break-normal flex items-center space-x-2">
                   <span class="block text-xs">◉</span> <div>{o.name}</div>
                 </div>
