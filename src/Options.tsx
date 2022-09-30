@@ -11,16 +11,20 @@ export const Options = (props: {
   let textInputRef: HTMLInputElement | undefined = undefined;
 
   const onAddNewOptionToState = () => {
+    if (newOptionToAdd().length === 0) return;
+
     addOption({ id: newOptionToAdd(), name: newOptionToAdd() });
     setNewOptionToAdd("");
     textInputRef?.focus();
   };
 
   return (
-    <div>
-      <div>
+    <div class="mx-4 lg:mx-0">
+      <div class="flex justify-center lg:justify-start">
         {!options.data.length && (
-          <p class="italic opacity-40 text-xl">No options are added, yet.</p>
+          <p class="italic opacity-40 text-lg lg:text-xl">
+            No options are added, yet.
+          </p>
         )}
         <ul class="list-inside ml-2 space-y-4">
           {options.data.map((o) => {
@@ -59,9 +63,10 @@ export const Options = (props: {
       </div>
       <input
         type="text"
+        placeholder="Type an option here"
         ref={textInputRef}
         autofocus
-        class="block border border-slate-600 text-sm rounded-lg w-full mt-10 p-2.5 bg-slate-700 placeholder-gray-400"
+        class="block border border-slate-600 text-sm rounded-lg w-full mt-10 p-2.5 bg-slate-700 placeholder-gray-400 placeholder:italic placeholder:text-slate-400"
         value={newOptionToAdd()}
         onInput={(e) => setNewOptionToAdd(e.currentTarget.value)}
         onKeyUp={(e) => {
@@ -69,7 +74,7 @@ export const Options = (props: {
         }}
       />
 
-      <div class="w-full flex justify-between mt-4 space-x-4">
+      <div class="w-full flex flex-col lg:flex-row justify-between mt-8 lg:mt-4 space-y-2 lg:space-y-0 space-x-0 lg:space-x-4">
         <Button variant="green" onClick={() => onAddNewOptionToState()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -86,20 +91,20 @@ export const Options = (props: {
             />
           </svg>
 
-          <div>Add Option</div>
+          <div class="text-sm lg:text-base">Add Option</div>
         </Button>
         <Button
           variant="purple"
           onClick={() => props.onSubmit()}
           isDisabled={options.data.length === 0 || props.isSpinning}
         >
-          Spin the Wheel!
+          <div class="text-sm lg:text-base">Spin the Wheel!</div>
         </Button>
       </div>
 
       <div class="opacity-50 mt-16">
-        <h2 class="font-bold">What is this app?</h2>
-        <p class="text-sm mt-1">
+        <h2 class="font-bold text-sm lg:text-base">What is this app?</h2>
+        <p class="text-xs lg:text-sm mt-2 lg:mt-1">
           After you add a couple of options via the control above, you will be
           able to spin the wheel: it will stop on a random option.
         </p>

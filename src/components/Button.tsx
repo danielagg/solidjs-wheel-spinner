@@ -28,7 +28,7 @@ export const Button = (props: {
   return (
     <button
       onClick={onClick}
-      class={`${getBackgroundColors()} w-1/2 px-6 py-3 rounded-lg font-bold text-lg flex justify-center items-center`}
+      class={`${getBackgroundColors()} w-full lg:w-1/2 px-6 py-3 rounded-lg font-bold text-lg flex justify-center items-center`}
     >
       {children}
     </button>
