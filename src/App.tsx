@@ -11,7 +11,10 @@ const App: Component = () => {
       <div class="bg-slate-800 h-screen w-full flex items-center justify-center text-slate-200">
         <div class="flex justify-center items-top space-x-24">
           <div class="w-1/2">
-            <Wheel isSpinning={isSpinning()} />
+            <Wheel
+              isSpinning={isSpinning()}
+              stopSpinning={() => setIsSpinning(false)}
+            />
           </div>
 
           <div class="w-1/2">

@@ -1,8 +1,25 @@
-export const Wheel = (props: { isSpinning: boolean }) => {
+import { createEffect } from "solid-js";
+
+export const Wheel = (props: {
+  isSpinning: boolean;
+  stopSpinning: () => void;
+}) => {
+  createEffect(() => {
+    props.isSpinning;
+
+    if (props.isSpinning) {
+      setTimeout(() => {
+        props.stopSpinning();
+      }, 1500);
+    }
+  });
+
   const TopArrow = () => {
     return (
       <div
-        class="absolute z-10 top-0 -mt-3 w-10 h-10 bg-slate-200 shadow-black shadow-2xl"
+        class={`absolute z-10 top-0 -mt-3 w-10 h-10 bg-slate-200 shadow-black shadow-2xl ${
+          !props.isSpinning && "animate-bounce"
+        }`}
         style={{
           "clip-path": `polygon(100% 0, 0 0, 50% 100%)`,
         }}
