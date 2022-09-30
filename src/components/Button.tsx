@@ -19,7 +19,7 @@ export const Button = (props: {
       case "green":
         return "bg-green-700 hover:bg-green-600";
       case "purple":
-        return "bg-fuchsia-600 hover:bg-fuchsia-700";
+        return "bg-fuchsia-700 hover:bg-fuchsia-600";
       default:
         return "";
     }
