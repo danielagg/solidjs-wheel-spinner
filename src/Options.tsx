@@ -1,12 +1,9 @@
 import { createSignal } from "solid-js";
 import { Button } from "./components/Button";
-import { useOptions } from "./OptionsContext";
+import { useAppContext } from "./AppContext";
 
-export const Options = (props: {
-  isSpinning: boolean;
-  onSubmit: () => void;
-}) => {
-  const [options, { addOption, removeOption }] = useOptions();
+export const Options = () => {
+  const [data, { addOption, removeOption, toggleWheelSpin }] = useAppContext();
   const [newOptionToAdd, setNewOptionToAdd] = createSignal("");
   let textInputRef: HTMLInputElement | undefined = undefined;
 
@@ -21,19 +18,19 @@ export const Options = (props: {
   return (
     <div class="mx-4 lg:mx-0">
       <div class="flex justify-center items-center lg:justify-start">
-        {!options.data.length && (
+        {!data.options.length && (
           <p class="italic opacity-40 text-lg lg:text-xl">
             No options are added, yet.
           </p>
         )}
         <ul class="list-inside ml-2 space-y-4">
-          {options.data.map((o) => {
+          {data.options.map((o) => {
             return (
               <li class="text-lg flex space-x-2 justify-center lg:justify-start items-center">
                 <div class="break-normal flex items-center space-x-2">
                   <span class="block text-xs">◉</span> <div>{o.name}</div>
                 </div>
-                {!props.isSpinning && (
+                {!data.isWheelSpinning && (
                   <div
                     onClick={() => {
                       removeOption(o);
@@ -95,8 +92,8 @@ export const Options = (props: {
         </Button>
         <Button
           variant="purple"
-          onClick={() => props.onSubmit()}
-          isDisabled={options.data.length === 0 || props.isSpinning}
+          onClick={() => toggleWheelSpin()}
+          isDisabled={data.options.length === 0 || data.isWheelSpinning}
         >
           <div class="text-sm lg:text-base">Spin the Wheel!</div>
         </Button>

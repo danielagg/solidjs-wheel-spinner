@@ -1,21 +1,16 @@
-import { Component, createContext, createSignal } from "solid-js";
+import { Component } from "solid-js";
 import { Options } from "./Options";
-import { OptionsProvider } from "./OptionsContext";
+import { AppContextProvider } from "./AppContext";
 import { Wheel } from "./Wheel";
 
 const App: Component = () => {
-  const [isSpinning, setIsSpinning] = createSignal(false);
-
   return (
-    <OptionsProvider>
+    <AppContextProvider>
       <div class="w-full min-h-screen bg-slate-800 text-slate-200 flex flex-col justify-center">
         <div class="flex items-center justify-center">
           <div class="flex flex-col lg:flex-row justify-center items-top space-x-0 lg:space-x-24 space-y-12 lg:space-y-0">
             <div class="w-full lg:w-1/2 mt-16 lg:mt-0">
-              <Wheel
-                isSpinning={isSpinning()}
-                stopSpinning={() => setIsSpinning(false)}
-              />
+              <Wheel />
             </div>
 
             <div class="w-full lg:w-1/2">
@@ -23,10 +18,7 @@ const App: Component = () => {
                 Set up your options
               </h1>
               <div class="mt-6 lg:mt-12">
-                <Options
-                  isSpinning={isSpinning()}
-                  onSubmit={() => setIsSpinning(true)}
-                />
+                <Options />
               </div>
             </div>
           </div>
@@ -46,7 +38,7 @@ const App: Component = () => {
           </p>
         </div>
       </div>
-    </OptionsProvider>
+    </AppContextProvider>
   );
 };
 

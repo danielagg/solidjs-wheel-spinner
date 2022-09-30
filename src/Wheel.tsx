@@ -1,15 +1,15 @@
 import { createEffect } from "solid-js";
+import { useAppContext } from "./AppContext";
 
-export const Wheel = (props: {
-  isSpinning: boolean;
-  stopSpinning: () => void;
-}) => {
+export const Wheel = () => {
+  const [data, { toggleWheelSpin }] = useAppContext();
+
   createEffect(() => {
-    props.isSpinning;
+    data.isWheelSpinning;
 
-    if (props.isSpinning) {
+    if (data.isWheelSpinning) {
       setTimeout(() => {
-        props.stopSpinning();
+        toggleWheelSpin();
       }, 2000);
     }
   });
@@ -18,7 +18,7 @@ export const Wheel = (props: {
     return (
       <div
         class={`absolute z-10 top-0 -mt-3 w-8 lg:w-10 h-8 lg:h-10 bg-slate-200 shadow-black shadow-2xl ${
-          !props.isSpinning && "animate-bounce"
+          !data.isWheelSpinning && "animate-bounce"
         }`}
         style={{
           "clip-path": `polygon(100% 0, 0 0, 50% 100%)`,
@@ -31,7 +31,7 @@ export const Wheel = (props: {
       <TopArrow />
       <div
         class={`relative z-0 w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] ${
-          props.isSpinning && "animate-spin"
+          data.isWheelSpinning && "animate-spin"
         }`}
       >
         <div class="absolute w-[150px] lg:w-[250px] h-[150px] lg:h-[250px] p-2.5 bg-violet-500 top-0 left-0 rounded-tl-full"></div>
